@@ -66,6 +66,7 @@ async def test_teams_card_click(approvers, allowed, monkeypatch):
     entry = pending_from("aad-alice", "Alice", "sess-t", platform="teams")
     adapter = object.__new__(teams_mod.TeamsAdapter)
     adapter.config = PlatformConfig(enabled=True, extra={})
+    adapter._approval_previews = {}
     monkeypatch.setattr(adapter, "_card_action_denied", lambda _from: None)
     monkeypatch.setattr(adapter, "_invoke_message", lambda text: ("message", text))
     monkeypatch.setattr(adapter, "_invoke_card", lambda body: ("card", body))
